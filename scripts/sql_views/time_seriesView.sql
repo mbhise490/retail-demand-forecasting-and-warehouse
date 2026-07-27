@@ -17,7 +17,7 @@ CREATE VIEW gold.vw_time_series
 AS
 
 SELECT
-
+    TOP 1000
     d.Full_Date AS SalesDate,
     SUM(f.SalesAmount) AS DailySales,
     SUM(f.Quantity) AS TotalQuantity,
@@ -44,5 +44,6 @@ INNER JOIN gold.dim_date d
 INNER JOIN gold.dim_customer c
     ON f.Customer_Key = c.Customer_Key
 GROUP BY
-    d.Full_Date;
+    d.Full_Date
+ORDER BY SalesDate;
 GO
